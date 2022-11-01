@@ -10,5 +10,5 @@ npm i xml2js
 The script can be invoked like this:
 
 ```
-node ofx2js.js OFXorQFXFILENAME > output.csv
+node ofx2csv.js OFXorQFXFILENAME > output.csv
 ```
