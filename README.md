@@ -6,3 +6,9 @@ This package depends on one nodeJS package which can be installed like this:
 ```
 npm i xml2js
 ```
+
+The script can be invoked like this:
+
+```
+node ofx2js.js OFXorQFXFILENAME > output.csv
+```
