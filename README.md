@@ -6,3 +6,11 @@ This package depends on one nodeJS package which can be installed like this:
 ```
 npm i xml2js
 ```
+
+The script can be invoked like this:
+
+```
+node ofx2csv.js OFXorQFXFILENAME > output.csv
+```
+
+This script adds an extra CSV line per-account which contains a value in the "BALAMT" column which can be used for automatically checking the current balance of an account to make sure no transactions have been duplicated or missed. If you don't want that behavior, feel free to change the line in ofx2csv.js which says: let insertBalanceAssertion = true;
