@@ -4,7 +4,9 @@ const process = require("process");
 
 
 fs.readFile(process.argv[2], "utf8", async function(err, ofxString) {
-  const table = await ofx2csv.generateTableFromOfx(ofxString);
+  let insertBalanceAssertion = true;
+
+  const table = await ofx2csv.generateTableFromOfx(ofxString, insertBalanceAssertion);
 
   console.log(table.keys.join(","));
   console.log(table.lines.join("\n"));

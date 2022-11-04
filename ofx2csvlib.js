@@ -7,9 +7,7 @@ function parseDate(str) {
   return `${y}-${m}-${d}`;
 }
 
-let insertBalanceAssertion = true;
-
-let generateTableFromOfx = async function(ofxString) {
+let generateTableFromOfx = async function(ofxString, insertBalanceAssertion = true) {
     let quotedkeys = [];
     let lines = [];
     let records = [];
