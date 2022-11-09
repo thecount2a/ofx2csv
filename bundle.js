@@ -8638,9 +8638,7 @@ function parseDate(str) {
   return `${y}-${m}-${d}`;
 }
 
-let insertBalanceAssertion = true;
-
-let generateTableFromOfx = async function(ofxString) {
+let generateTableFromOfx = async function(ofxString, insertBalanceAssertion = true) {
     let quotedkeys = [];
     let lines = [];
     let records = [];
@@ -8804,7 +8802,6 @@ let generateTableFromOfx = async function(ofxString) {
   return {lines, records, keys: quotedkeys};
 };
 
-
-module.exports.generateTableFromOfx = generateTableFromOfx;
+window.generateTableFromOfx = generateTableFromOfx;
 
 },{"./ofx":32}]},{},[33]);
