@@ -8629,6 +8629,11 @@ function parse(data) {
 module.exports.parse = parse;
 
 },{"xml2js/lib/parser":30}],33:[function(require,module,exports){
+//import { generateTableFromOfx } from "./csv2ofxlib.js";
+const ofx2csv = require("./ofx2csvlib.js");
+window.generateTableFromOfx = ofx2csv.generateTableFromOfx;
+
+},{"./ofx2csvlib.js":34}],34:[function(require,module,exports){
 const ofx = require("./ofx");
 
 function parseDate(str) {
@@ -8802,6 +8807,6 @@ let generateTableFromOfx = async function(ofxString, insertBalanceAssertion = tr
   return {lines, records, keys: quotedkeys};
 };
 
-window.generateTableFromOfx = generateTableFromOfx;
+module.exports.generateTableFromOfx = generateTableFromOfx;
 
 },{"./ofx":32}]},{},[33]);

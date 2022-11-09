@@ -171,4 +171,4 @@ let generateTableFromOfx = async function(ofxString, insertBalanceAssertion = tr
   return {lines, records, keys: quotedkeys};
 };
 
-window.generateTableFromOfx = generateTableFromOfx;
+module.exports.generateTableFromOfx = generateTableFromOfx;
