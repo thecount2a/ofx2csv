@@ -8644,6 +8644,7 @@ function parseDate(str) {
 }
 
 let generateTableFromOfx = async function(ofxString, insertBalanceAssertion = true) {
+    let keys = [];
     let quotedkeys = [];
     let lines = [];
     let records = [];
@@ -8664,7 +8665,7 @@ let generateTableFromOfx = async function(ofxString, insertBalanceAssertion = tr
           }
 
           // Default set of normal columns. Some files contain more, they will end up at the end
-          let keys = ['ACCTID', 'ACCTTYPE', 'TRNTYPE', 'DTPOSTED', 'TRNAMT', 'NAME', 'MEMO', 'FITID', 'CHECKNUM', 'BALAMT'];
+          keys = ['ACCTID', 'ACCTTYPE', 'TRNTYPE', 'DTPOSTED', 'TRNAMT', 'NAME', 'MEMO', 'FITID', 'CHECKNUM', 'BALAMT'];
           quotedkeys = keys.map(key => '"'+key+'"');
 
           if (!bankAccounts[0])
@@ -8752,16 +8753,18 @@ let generateTableFromOfx = async function(ofxString, insertBalanceAssertion = tr
 
                 // Push at the correct location
                 let line = [];
+                let quotedline = [];
                 keys.forEach(key => {
                   let val = "";
                   if (t[key])
                   {
                     val = t[key];
                   }
-                  line.push("\""+val.replace("\"", "\"\"")+"\"");
+                  line.push(val);
+                  quotedline.push("\""+val.replace("\"", "\"\"")+"\"");
                 });
 
-                lines.push(line.join(","));
+                lines.push(quotedline.join(","));
                 records.push(line);
               });
             }
@@ -8769,6 +8772,7 @@ let generateTableFromOfx = async function(ofxString, insertBalanceAssertion = tr
             if (insertBalanceAssertion && acct.LEDGERBAL)
             {
                 let line = [];
+                let quotedline = [];
                 keys.forEach(key => {
                   let val = "";
                   if (key == "NAME")
@@ -8795,16 +8799,17 @@ let generateTableFromOfx = async function(ofxString, insertBalanceAssertion = tr
                   {
                     val = "0.00";
                   }
-                  line.push("\""+val.replace("\"", "\"\"")+"\"");
+                  line.push(val);
+                  quotedline.push("\""+val.replace("\"", "\"\"")+"\"");
                 });
 
-                lines.push(line.join(","));
+                lines.push(quotedline.join(","));
                 records.push(line);
             }
           });
 
     });
-  return {lines, records, keys: quotedkeys};
+  return {lines, records, keys, quotedkeys};
 };
 
 module.exports.generateTableFromOfx = generateTableFromOfx;
